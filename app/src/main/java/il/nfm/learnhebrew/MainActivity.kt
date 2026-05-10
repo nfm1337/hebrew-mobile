@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import dagger.hilt.android.AndroidEntryPoint
+import il.nfm.learnhebrew.presentation.onboarding.OnboardingScreen
 import il.nfm.learnhebrew.ui.preview.DesignSystemPreview
 import il.nfm.learnhebrew.ui.theme.LearnHebrewTheme
 
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LearnHebrewTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    DesignSystemPreview()
+                    OnboardingScreen({})
                 }
             }
         }

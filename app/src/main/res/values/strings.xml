@@ -1,3 +1,10 @@
 ﻿<resources>
     <string name="app_name">Learn Hebrew</string>
+    <string name="onboarding_header_label">ИВРИТ · READ</string>
+    <string name="onboarding_step_indicator">01 / 02 — НАЧАЛО</string>
+    <string name="onboarding_level_title">Какой\nу тебя\nуровень?</string>
+    <string name="onboarding_level_subtitle">Под него подстраивается каждый текст\nи каждая карточка.\nМожно поменять позже.</string>
+    <string name="onboarding_topics_header">ТЕМЫ ИНТЕРЕСА</string>
+    <string name="onboarding_topics_chosen_count">%1$d ВЫБРАНО · МИН %2$d</string>
+    <string name="onboarding_proceed_button">Дальше →</string>
 </resources>

@@ -3,8 +3,6 @@
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-// ── Raw palette ──────────────────────────────────────────────────────────────
-
 object LightColors {
     val Bg = Color(0xFFFAFAF7)
     val Surface = Color(0xFFFFFFFF)
