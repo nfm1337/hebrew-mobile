@@ -1,9 +1,8 @@
 package il.nfm.learnhebrew.domain.repository
 
-import il.nfm.learnhebrew.data.model.request.GenerateSessionRequest
-import il.nfm.learnhebrew.data.model.response.GenerateSessionResponse
-import il.nfm.learnhebrew.data.network.NetworkResult
+import il.nfm.learnhebrew.core.NetworkResult
+import il.nfm.learnhebrew.domain.entity.Session
 
 interface SessionRepository {
-    suspend fun generateSession(request: GenerateSessionRequest): NetworkResult<GenerateSessionResponse>
+    suspend fun generateSession(userId: String, level: String, topic: String): NetworkResult<Session>
 }

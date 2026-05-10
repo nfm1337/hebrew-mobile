@@ -2,6 +2,7 @@ package il.nfm.learnhebrew.data.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import il.nfm.learnhebrew.data.network.adapter.InstantAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,6 +13,7 @@ object RetrofitClient {
 
     fun create(baseUrl: String, debug: Boolean): ApiService {
         val moshi = Moshi.Builder()
+            .add(InstantAdapter())
             .addLast(KotlinJsonAdapterFactory())
             .build()
 

@@ -1,6 +1,6 @@
 package il.nfm.learnhebrew.core.util
 
-import il.nfm.learnhebrew.data.network.NetworkResult
+import il.nfm.learnhebrew.core.NetworkResult
 import retrofit2.Response
 
 suspend fun <T> safeCall(call: suspend () -> Response<T>): NetworkResult<T> {
