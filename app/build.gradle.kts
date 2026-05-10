@@ -1,6 +1,9 @@
-﻿plugins {
+﻿import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
+plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -22,12 +25,23 @@ android {
     }
 
     buildTypes {
+        val localProperties = gradleLocalProperties(projectRootDir = rootProject.projectDir, providers = providers)
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            val prodUrl =  localProperties.getProperty("prodUrl") ?: ""
+            buildConfigField("String", "BASE_URL", prodUrl)
+        }
+
+        debug {
+            isMinifyEnabled = false
+            val devUrl = localProperties.getProperty("devUrl") ?: ""
+            buildConfigField("String", "BASE_URL", devUrl)
         }
     }
     compileOptions {
@@ -36,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -49,6 +64,15 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.google.material)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.moshi)
+    implementation(libs.okhttp.logging)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
+    implementation(libs.navigation.compose)
+    implementation(libs.viewmodel.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
