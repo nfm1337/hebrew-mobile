@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.moshi.kotlin)
     implementation(libs.hilt.core)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
     implementation(libs.navigation.compose)
     implementation(libs.viewmodel.compose)
