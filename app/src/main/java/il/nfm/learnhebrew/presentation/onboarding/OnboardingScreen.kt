@@ -251,7 +251,7 @@ private fun TopicChip(
         Text(
             topic.label,
             style = t.bodyS,
-            color = c.yellowInk,
+            color = if (topic.isChosen) c.yellowInk else c.ink
         )
     }
 }
