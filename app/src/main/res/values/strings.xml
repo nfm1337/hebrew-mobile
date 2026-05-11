@@ -45,9 +45,9 @@
     <string name="generation_length_medium_words">~150</string>
     <string name="generation_length_long_label">длинный</string>
     <string name="generation_length_long_words">~280</string>
-    <string name="generation_tab_read">ЧИТАТЬ</string>
-    <string name="generation_tab_review">ПОВТОР</string>
-    <string name="generation_tab_vocab">СЛОВАРЬ</string>
-    <string name="generation_tab_me">Я</string>
+    <string name="main_tab_read">ЧИТАТЬ</string>
+    <string name="main_tab_review">ПОВТОР</string>
+    <string name="main_tab_words">СЛОВА</string>
+    <string name="main_tab_stats">СТАТЫ</string>
     <string name="generation_recent_words_mask">%1$d НОВ.</string>
 </resources>

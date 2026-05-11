@@ -1,7 +1,6 @@
 package il.nfm.learnhebrew.presentation.generation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,16 +9,11 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -86,138 +80,130 @@ fun GenerationScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(c.bg)
-            .windowInsetsPadding(WindowInsets.statusBars),
+            .verticalScroll(rememberScrollState()),
     ) {
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState()),
-        ) {
-            Column(modifier = Modifier.padding(horizontal = Spacing.GutterH)) {
-                Spacer(Modifier.height(Spacing.BlockGap))
+        Column(modifier = Modifier.padding(horizontal = Spacing.GutterH)) {
+            Spacer(Modifier.height(Spacing.BlockGap))
 
-                SectionHeader(
-                    label = stringResource(R.string.generation_header_label),
-                    trailing = stringResource(R.string.generation_edition_label),
-                )
+            SectionHeader(
+                label = stringResource(R.string.generation_header_label),
+                trailing = stringResource(R.string.generation_edition_label),
+            )
 
-                Spacer(Modifier.height(Spacing.SectionGap))
+            Spacer(Modifier.height(Spacing.SectionGap))
 
-                val titleRaw = stringResource(R.string.generation_title)
-                val titleText = buildAnnotatedString {
-                    val dotIndex = titleRaw.lastIndexOf('.')
-                    append(titleRaw)
-                    if (dotIndex >= 0) {
-                        addStyle(SpanStyle(color = c.muted), dotIndex, dotIndex + 1)
-                    }
+            val titleRaw = stringResource(R.string.generation_title)
+            val titleText = buildAnnotatedString {
+                val dotIndex = titleRaw.lastIndexOf('.')
+                append(titleRaw)
+                if (dotIndex >= 0) {
+                    addStyle(SpanStyle(color = c.muted), dotIndex, dotIndex + 1)
                 }
-                Text(titleText, style = t.display2, color = c.ink)
-
-                Spacer(Modifier.height(Spacing.SectionGap))
-
-                SectionHeader(label = stringResource(R.string.generation_section_level))
-
-                Spacer(Modifier.height(Spacing.BlockGap))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
-                ) {
-                    Level.entries.forEach { level ->
-                        SelectionChip(
-                            label = level.code,
-                            isSelected = uiState.selectedLevel == level,
-                            onClick = { onLevelSelect(level) },
-                            modifier = Modifier.weight(1f),
-                        )
-                    }
-                }
-
-                Spacer(Modifier.height(Spacing.SectionGap))
-
-                SectionHeader(label = stringResource(R.string.generation_section_topic))
-
-                Spacer(Modifier.height(Spacing.BlockGap))
-
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
-                    verticalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
-                ) {
-                    uiState.topics.forEach { topic ->
-                        SelectionChip(
-                            label = stringResource(topic.labelRes),
-                            isSelected = topic.id == uiState.selectedTopicId,
-                            onClick = { onTopicSelect(topic.id) },
-                        )
-                    }
-                }
-
-                Spacer(Modifier.height(Spacing.SectionGap))
-
-                SectionHeader(label = stringResource(R.string.generation_section_length))
-
-                Spacer(Modifier.height(Spacing.BlockGap))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
-                ) {
-                    TextLength.entries.forEach { length ->
-                        SelectionChipTwoLine(
-                            title = stringResource(length.labelRes),
-                            subtitle = stringResource(length.approxRes),
-                            isSelected = uiState.selectedLength == length,
-                            onClick = { onLengthSelect(length) },
-                            modifier = Modifier.weight(1f),
-                        )
-                    }
-                }
-
-                Spacer(Modifier.height(Spacing.SectionGap))
             }
+            Text(titleText, style = t.display2, color = c.ink)
 
-            Button(
-                onClick = onGenerate,
-                enabled = uiState.canGenerate,
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = c.blue,
-                    contentColor = c.blueInk,
-                    disabledContainerColor = c.surface2,
-                    disabledContentColor = c.muted,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(Sizes.PrimaryBtnH),
+            Spacer(Modifier.height(Spacing.SectionGap))
+
+            SectionHeader(label = stringResource(R.string.generation_section_level))
+
+            Spacer(Modifier.height(Spacing.BlockGap))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
             ) {
-                Text(stringResource(R.string.generation_cta) + "  →", style = t.cta)
+                Level.entries.forEach { level ->
+                    SelectionChip(
+                        label = level.code,
+                        isSelected = uiState.selectedLevel == level,
+                        onClick = { onLevelSelect(level) },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
             }
 
-            if (uiState.recent.isNotEmpty()) {
-                Column(modifier = Modifier.padding(horizontal = Spacing.GutterH)) {
-                    Spacer(Modifier.height(Spacing.SectionGap))
+            Spacer(Modifier.height(Spacing.SectionGap))
 
-                    SectionHeader(
-                        label = stringResource(R.string.generation_section_recent),
-                        trailing = uiState.recent.size.toString(),
+            SectionHeader(label = stringResource(R.string.generation_section_topic))
+
+            Spacer(Modifier.height(Spacing.BlockGap))
+
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
+                verticalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
+            ) {
+                uiState.topics.forEach { topic ->
+                    SelectionChip(
+                        label = stringResource(topic.labelRes),
+                        isSelected = topic.id == uiState.selectedTopicId,
+                        onClick = { onTopicSelect(topic.id) },
                     )
+                }
+            }
 
-                    uiState.recent.forEach { item ->
-                        Box(
-                            Modifier
-                                .fillMaxWidth()
-                                .height(Spacing.Hairline)
-                                .background(c.line),
-                        )
-                        RecentTextRow(item = item, onClick = { onRecentClick(item.id) })
-                    }
+            Spacer(Modifier.height(Spacing.SectionGap))
+
+            SectionHeader(label = stringResource(R.string.generation_section_length))
+
+            Spacer(Modifier.height(Spacing.BlockGap))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
+            ) {
+                TextLength.entries.forEach { length ->
+                    SelectionChipTwoLine(
+                        title = stringResource(length.labelRes),
+                        subtitle = stringResource(length.approxRes),
+                        isSelected = uiState.selectedLength == length,
+                        onClick = { onLengthSelect(length) },
+                        modifier = Modifier.weight(1f),
+                    )
                 }
             }
 
             Spacer(Modifier.height(Spacing.SectionGap))
         }
 
-        BottomNavBar()
+        Button(
+            onClick = onGenerate,
+            enabled = uiState.canGenerate,
+            shape = RectangleShape,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = c.blue,
+                contentColor = c.blueInk,
+                disabledContainerColor = c.surface2,
+                disabledContentColor = c.muted,
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Sizes.PrimaryBtnH),
+        ) {
+            Text(stringResource(R.string.generation_cta) + "  →", style = t.cta)
+        }
+
+        if (uiState.recent.isNotEmpty()) {
+            Column(modifier = Modifier.padding(horizontal = Spacing.GutterH)) {
+                Spacer(Modifier.height(Spacing.SectionGap))
+
+                SectionHeader(
+                    label = stringResource(R.string.generation_section_recent),
+                    trailing = uiState.recent.size.toString(),
+                )
+
+                uiState.recent.forEach { item ->
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .height(Spacing.Hairline)
+                            .background(c.line),
+                    )
+                    RecentTextRow(item = item, onClick = { onRecentClick(item.id) })
+                }
+            }
+        }
+
+        Spacer(Modifier.height(Spacing.SectionGap))
     }
 }
 
@@ -253,50 +239,6 @@ private fun RecentTextRow(
 
         Spacer(Modifier.width(Spacing.InlineGap))
         Text("→", style = t.body, color = c.muted)
-    }
-}
-
-private enum class NavTab(val labelRes: Int) {
-    Read(R.string.generation_tab_read),
-    Review(R.string.generation_tab_review),
-    Vocab(R.string.generation_tab_vocab),
-    Me(R.string.generation_tab_me),
-}
-
-@Composable
-private fun BottomNavBar(activeTab: NavTab = NavTab.Read) {
-    val c = LocalAppColors.current
-    val t = LocalAppTypography.current
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Sizes.BottomNavH)
-            .border(Spacing.Hairline, c.line)
-            .background(c.bg)
-            .navigationBarsPadding(),
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        NavTab.entries.forEach { tab ->
-            val isActive = tab == activeTab
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(horizontal = Spacing.InlineGap),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(6.dp)
-                        .background(if (isActive) c.blue else c.line2),
-                )
-                Spacer(Modifier.height(Spacing.Tight))
-                Text(
-                    stringResource(tab.labelRes),
-                    style = t.metaXs,
-                    color = if (isActive) c.ink else c.muted,
-                )
-            }
-        }
     }
 }
 

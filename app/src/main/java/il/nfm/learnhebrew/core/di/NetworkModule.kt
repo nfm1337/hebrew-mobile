@@ -8,7 +8,9 @@ import dagger.hilt.components.SingletonComponent
 import il.nfm.learnhebrew.BuildConfig
 import il.nfm.learnhebrew.data.network.ApiService
 import il.nfm.learnhebrew.data.network.RetrofitClient
+import il.nfm.learnhebrew.data.repository.OnboardingRepositoryImpl
 import il.nfm.learnhebrew.data.repository.SessionRepositoryImpl
+import il.nfm.learnhebrew.domain.repository.OnboardingRepository
 import il.nfm.learnhebrew.domain.repository.SessionRepository
 import javax.inject.Singleton
 
@@ -31,7 +33,9 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindSessionRepository(
-        impl: SessionRepositoryImpl
-    ): SessionRepository
+    fun bindSessionRepository(impl: SessionRepositoryImpl): SessionRepository
+
+    @Binds
+    @Singleton
+    fun bindOnboardingRepository(impl: OnboardingRepositoryImpl): OnboardingRepository
 }
