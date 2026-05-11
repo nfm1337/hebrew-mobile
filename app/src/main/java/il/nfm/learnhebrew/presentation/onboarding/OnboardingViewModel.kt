@@ -2,6 +2,8 @@ package il.nfm.learnhebrew.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import il.nfm.learnhebrew.presentation.common.Level
+import il.nfm.learnhebrew.presentation.common.defaultTopics
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

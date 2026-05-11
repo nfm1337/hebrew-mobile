@@ -1,5 +1,27 @@
-﻿<resources>
+<resources>
     <string name="app_name">Learn Hebrew</string>
+
+    <!-- Levels -->
+    <string name="level_a1_title">Начальный</string>
+    <string name="level_a1_description">Простые предложения, настоящее время, базовые слова</string>
+    <string name="level_a2_title">Базовый</string>
+    <string name="level_a2_description">Прошедшее и будущее время, бытовые темы, ~1500 слов</string>
+    <string name="level_b1_title">Средний</string>
+    <string name="level_b1_description">Газетные тексты, биньяны, абстрактные понятия</string>
+
+    <!-- Topics -->
+    <string name="topic_food">Еда и кухня</string>
+    <string name="topic_history">История Израиля</string>
+    <string name="topic_politics">Политика</string>
+    <string name="topic_tech">Технологии</string>
+    <string name="topic_science">Наука</string>
+    <string name="topic_culture">Культура и искусство</string>
+    <string name="topic_travel">Путешествия</string>
+    <string name="topic_family">Семья и дом</string>
+    <string name="topic_nature">Природа</string>
+    <string name="topic_sport">Спорт</string>
+
+    <!-- Onboarding -->
     <string name="onboarding_header_label">ИВРИТ · READ</string>
     <string name="onboarding_step_indicator">01 / 02 — НАЧАЛО</string>
     <string name="onboarding_level_title">Какой\nу тебя\nуровень?</string>
@@ -7,4 +29,25 @@
     <string name="onboarding_topics_header">ТЕМЫ ИНТЕРЕСА</string>
     <string name="onboarding_topics_chosen_count">%1$d ВЫБРАНО · МИН %2$d</string>
     <string name="onboarding_proceed_button">Дальше →</string>
+
+    <!-- Generation -->
+    <string name="generation_header_label">ИВРИТ · READ</string>
+    <string name="generation_edition_label">10 МАЯ — № 048</string>
+    <string name="generation_title">Новый\nтекст.</string>
+    <string name="generation_section_level">УРОВЕНЬ</string>
+    <string name="generation_section_topic">ТЕМА</string>
+    <string name="generation_section_length">ДЛИНА</string>
+    <string name="generation_section_recent">НЕДАВНЕЕ</string>
+    <string name="generation_cta">Сгенерировать</string>
+    <string name="generation_length_short_label">короткий</string>
+    <string name="generation_length_short_words">~80 слов</string>
+    <string name="generation_length_medium_label">средний</string>
+    <string name="generation_length_medium_words">~150</string>
+    <string name="generation_length_long_label">длинный</string>
+    <string name="generation_length_long_words">~280</string>
+    <string name="generation_tab_read">ЧИТАТЬ</string>
+    <string name="generation_tab_review">ПОВТОР</string>
+    <string name="generation_tab_vocab">СЛОВАРЬ</string>
+    <string name="generation_tab_me">Я</string>
+    <string name="generation_recent_words_mask">%1$d НОВ.</string>
 </resources>

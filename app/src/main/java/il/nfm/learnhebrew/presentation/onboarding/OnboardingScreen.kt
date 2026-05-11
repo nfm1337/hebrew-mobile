@@ -31,13 +31,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import il.nfm.learnhebrew.R
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import il.nfm.learnhebrew.R
+import il.nfm.learnhebrew.presentation.common.Level
+import il.nfm.learnhebrew.presentation.common.defaultTopics
+import il.nfm.learnhebrew.ui.components.SectionHeader
+import il.nfm.learnhebrew.ui.components.SelectionChip
 import il.nfm.learnhebrew.ui.theme.LearnHebrewTheme
 import il.nfm.learnhebrew.ui.theme.LocalAppColors
 import il.nfm.learnhebrew.ui.theme.LocalAppTypography
@@ -84,13 +88,10 @@ fun OnboardingScreenContent(
         ) {
             Spacer(Modifier.height(Spacing.BlockGap))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Text(stringResource(R.string.onboarding_header_label), style = t.meta, color = c.muted)
-                Text(stringResource(R.string.onboarding_step_indicator), style = t.meta, color = c.muted)
-            }
+            SectionHeader(
+                label = stringResource(R.string.onboarding_header_label),
+                trailing = stringResource(R.string.onboarding_step_indicator),
+            )
 
             Spacer(Modifier.height(Spacing.SectionGap))
 
@@ -131,18 +132,15 @@ fun OnboardingScreenContent(
             Spacer(Modifier.height(Spacing.SectionGap))
 
             val chosenCount = uiState.topics.count { it.isChosen }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(stringResource(R.string.onboarding_topics_header), style = t.meta, color = c.mid)
-                Text(
-                    stringResource(R.string.onboarding_topics_chosen_count, chosenCount, MIN_TOPICS_REQUIRED),
-                    style = t.meta,
-                    color = if (chosenCount >= MIN_TOPICS_REQUIRED) c.green else c.muted,
-                )
-            }
+            SectionHeader(
+                label = stringResource(R.string.onboarding_topics_header),
+                trailing = stringResource(
+                    R.string.onboarding_topics_chosen_count,
+                    chosenCount,
+                    MIN_TOPICS_REQUIRED
+                ),
+                trailingColor = if (chosenCount >= MIN_TOPICS_REQUIRED) c.green else c.muted,
+            )
 
             Spacer(Modifier.height(Spacing.BlockGap))
 
@@ -151,9 +149,12 @@ fun OnboardingScreenContent(
                 verticalArrangement = Arrangement.spacedBy(Spacing.InlineGap),
             ) {
                 uiState.topics.forEach { topic ->
-                    TopicChip(
-                        topic = topic,
+                    SelectionChip(
+                        label = stringResource(topic.labelRes),
+                        isSelected = topic.isChosen,
                         onClick = { onTopicToggle(topic.id) },
+                        selectedBg = c.yellow,
+                        selectedFg = c.yellowInk,
                     )
                 }
             }
@@ -198,7 +199,7 @@ private fun LevelPickerRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            level.label,
+            level.code,
             style = t.numL,
             color = if (isSelected) c.bg else c.ink2,
             modifier = Modifier.width(56.dp),
@@ -208,13 +209,13 @@ private fun LevelPickerRow(
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                level.title,
+                stringResource(level.titleRes),
                 style = t.body.copy(fontWeight = FontWeight.SemiBold),
                 color = if (isSelected) c.bg else c.ink2,
             )
             Spacer(Modifier.height(Spacing.Tight))
             Text(
-                level.description,
+                stringResource(level.descriptionRes),
                 style = t.bodyS,
                 color = c.muted,
             )
@@ -228,31 +229,6 @@ private fun LevelPickerRow(
                     .background(c.bg, CircleShape),
             )
         }
-    }
-}
-
-@Composable
-private fun TopicChip(
-    topic: Topic,
-    onClick: () -> Unit,
-) {
-    val c = LocalAppColors.current
-    val t = LocalAppTypography.current
-
-    Box(
-        modifier = Modifier
-            .height(Sizes.ChipH)
-            .background(if (topic.isChosen) c.yellow else c.bg)
-            .border(Spacing.Hairline, if (topic.isChosen) c.yellow else c.line2)
-            .clickable(onClick = onClick)
-            .padding(horizontal = 14.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            topic.label,
-            style = t.bodyS,
-            color = if (topic.isChosen) c.yellowInk else c.ink
-        )
     }
 }
 
